@@ -3,9 +3,9 @@ import cors from 'cors';
 import jwt from 'jsonwebtoken';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import { register, login, logout } from '../controller/authController.js';
-import { post, updatePost, deletePost, myPosts, searchPosts, allPosts } from '../controller/postController.js';
-import { forgotPassword, resetPassword } from '../controller/recoverPasswordController.js';
+import { register, login, logout } from './controller/authController.js';
+import { post, updatePost, deletePost, myPosts, searchPosts, allPosts } from './controller/postController.js';
+import { forgotPassword, resetPassword } from './controller/recoverPasswordController.js';
 
 dotenv.config();
 const app=express();
