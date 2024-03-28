@@ -12,8 +12,8 @@ const forgotPassword = (req, res) => {
     const transporter = nodemailer.createTransport({
         service:'gmail',
         auth: {
-            user: process.env.EMAIL,
-            pass: process.env.EMAIL_PASSWORD
+            user: process.env.REACT_APP_EMAIL,
+            pass: process.env.REACT_APP_EMAIL_PASSWORD
         }
     });
 
@@ -29,12 +29,12 @@ const forgotPassword = (req, res) => {
             return res.json({ EError: 'No user found with this email' });
         }
 
-        const recoveryToken = jwt.sign({ email }, process.env.JWT_KEY, { expiresIn: '1h' });
+        const recoveryToken = jwt.sign({ email }, process.env.REACT_APP_JWT_KEY, { expiresIn: '1h' });
 
         const resetLink=`https://the-secret-lair-v7oi-eight.vercel.app/user/reset-password/${recoveryToken}`;
 
         const mailOptions={
-            from: process.env.EMAIL,
+            from: process.env.REACT_APP_EMAIL,
             to: email, 
             subject: 'Password recovery', 
             text: `Click on the following link to recover your password: ${resetLink}`
@@ -55,7 +55,7 @@ const resetPassword = (req, res) => {
     const token = req.body.token;
     const newPassword = req.body.newPassword;
 
-    jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
+    jwt.verify(token, process.env.REACT_APP_JWT_KEY, (err, decoded) => {
         if (err) {
             return res.json({ Error: 'Invalid or expired token' });
         }
