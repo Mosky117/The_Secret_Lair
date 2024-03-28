@@ -16,7 +16,7 @@ function App() {
 
 
   const handleLogout=()=>{
-    axios.get(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/user/logout`)
+    axios.get(`https://the-secret-lair.vercel.app/user/logout`)
     .then(res=>{
         // eslint-disable-next-line no-restricted-globals
         location.reload(true);
@@ -26,7 +26,7 @@ function App() {
   }
 
   useEffect(()=>{
-    axios.get('https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/')
+    axios.get('https://the-secret-lair.vercel.app/')
     .then(res=>{
         if(res.data.Status==='Success'){
             setUsername(res.data.username);
