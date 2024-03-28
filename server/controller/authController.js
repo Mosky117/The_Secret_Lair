@@ -55,7 +55,7 @@ const login=(req, res)=>{
                     const id=datas[0].id;
                     const token= jwt.sign({username, id},process.env.REACT_APP_JWT_KEY,{expiresIn:'1d'});
                     res.cookie('token', token, {
-                        httpOnly: true,
+                        httpOnly: false,
                         secure: true,
                         sameSite: "none"
                     }); 
