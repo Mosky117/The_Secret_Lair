@@ -54,12 +54,7 @@ const login=(req, res)=>{
                     const username=datas[0].username;
                     const id=datas[0].id;
                     const token= jwt.sign({username, id},process.env.REACT_APP_JWT_KEY,{expiresIn:'1d'});
-                    res.cookie('token', token, {
-                        httpOnly: true,
-                        secure: true,
-                        sameSite: "none"
-                    }); 
-                    return res.json({Status: 'Success'});
+                    return res.json({Status: 'Success', token});
                 } else {
                     return res.json({Error: 'Incorrect password'});
                 }

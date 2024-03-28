@@ -9,39 +9,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MyPosts from './MyPosts';
 import Navbar from './Navbar';
 import axios from 'axios';
+import useUserSession from './useUserSession';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [username, setUsername]=useState('');
-
-
-  const handleLogout=()=>{
-    axios.get(`https://the-secret-lair.vercel.app/user/logout`)
-    .then(res=>{
-        // eslint-disable-next-line no-restricted-globals
-        location.reload(true);
-    }).catch(err=>{
-        console.log(err);
-    })
-  }
-
-  useEffect(()=>{
-    axios.get('https://the-secret-lair.vercel.app/')
-    .then(res=>{
-        if(res.data.Status==='Success'){
-            setUsername(res.data.username);
-            setIsLoggedIn(true);
-            
-        }else{
-            setIsLoggedIn(false);
-        }
-    })
-    .then(err=>console.log(err));
-  },[])
-
+  
   return (
     <BrowserRouter>
-    <Navbar isLoggedIn={isLoggedIn} handleLogout={handleLogout} username={username}></Navbar>
+    <Navbar></Navbar>
       <Routes>
         <Route path='/' element={<Home/>}></Route>
         <Route path='/user/register' element={<Register/>}></Route>

@@ -10,14 +10,13 @@ function Login(){
 
     const navigate=useNavigate();
 
-    axios.defaults.withCredentials=true;
-
     const handleSubmit=(e)=>{
         e.preventDefault();
         axios.post(`https://the-secret-lair.vercel.app/user/login`,values)
         .then(res=>{
             console.log(res);
             if(res.data.Status==='Success'){
+                localStorage.setItem('token', res.data.token);
                 navigate('/');
             }else{
                 alert('Error');
