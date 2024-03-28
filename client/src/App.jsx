@@ -8,8 +8,6 @@ import ResetPassword from './ResetPassword';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MyPosts from './MyPosts';
 import Navbar from './Navbar';
-import axios from 'axios';
-import useUserSession from './useUserSession';
 
 function App() {
   

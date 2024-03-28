@@ -1,7 +1,8 @@
 import {useState} from "react";
 
 export default function useUserSession(){
-    const [userToken, setToken]=useState(localStorage.getItem('token'));
+    const saveToken=localStorage.getItem('token');
+    const [userToken, setToken]=useState(saveToken);
     function logout(){
         localStorage.removeItem('token');
         setToken(null);
