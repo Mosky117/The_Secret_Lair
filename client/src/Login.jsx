@@ -21,6 +21,7 @@ function Login(){
                 saveUserSession(res.data.token, ()=>{
                     navigate('/');
                 });
+                
             }else{
                 alert('Error');
             }
