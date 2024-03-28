@@ -18,8 +18,9 @@ function Login(){
         .then(res=>{
             console.log(res);
             if(res.data.Status==='Success'){
-                saveUserSession(res.data.token);
-                navigate('/');
+                saveUserSession(res.data.token, ()=>{
+                    navigate('/');
+                });
             }else{
                 alert('Error');
             }

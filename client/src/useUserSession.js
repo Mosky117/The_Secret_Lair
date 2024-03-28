@@ -7,10 +7,11 @@ export default function useUserSession(){
         localStorage.removeItem('token');
         setToken(null);
     }
-    function saveUserSession(token){
+    function saveUserSession(token, callback){
         localStorage.setItem('token', token);
-        setToken(token);
+        setToken(token, callback);
     }
+
     return {
         token: userToken,
         saveUserSession,
