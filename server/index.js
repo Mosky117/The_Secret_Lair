@@ -6,22 +6,22 @@ import dotenv from 'dotenv';
 import { register, login, logout } from './controller/authController.js';
 import { post, updatePost, deletePost, myPosts, searchPosts, allPosts } from './controller/postController.js';
 import { forgotPassword, resetPassword } from './controller/recoverPasswordController.js';
-// app.options("/*", (req, res) => {
-//     res.header('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
-//     res.header('Access-Control-Allow-Credentials', true);
-//     res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH");
-//     res.header('Access-Control-Allow-Headers',
-//         'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
-//     res.status(204).end();
-// });
 
 dotenv.config();
 const app=express();
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
-    next();
-});
-
+// app.use((req, res, next) => {
+    //     res.setHeader('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
+    //     next();
+    // });
+    
+    app.options("/*", (req, res) => {
+        res.header('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
+        res.header('Access-Control-Allow-Credentials', true);
+        res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH");
+        res.header('Access-Control-Allow-Headers',
+            'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+        res.status(204).end();
+    });
 
 app.use(cors({
     origin: [process.env.REACT_APP_URL],
