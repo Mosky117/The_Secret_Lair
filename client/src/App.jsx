@@ -9,6 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import MyPosts from './MyPosts';
 import Navbar from './Navbar';
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -16,7 +19,7 @@ function App() {
 
 
   const handleLogout=()=>{
-    axios.get('https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/user/logout')
+    axios.get(`${process.env.REACT_APP_URL}/user/logout`)
     .then(res=>{
         // eslint-disable-next-line no-restricted-globals
         location.reload(true);
@@ -26,7 +29,7 @@ function App() {
   }
 
   useEffect(()=>{
-    axios.get('https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/')
+    axios.get(`${process.env.REACT_APP_URL}/`)
     .then(res=>{
         if(res.data.Status==='Success'){
             setUsername(res.data.username);

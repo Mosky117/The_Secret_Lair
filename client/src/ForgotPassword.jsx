@@ -1,5 +1,8 @@
 import React,{useState} from "react";
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 function ForgotPassword(){
     const [values, setValues]=useState({
@@ -8,7 +11,7 @@ function ForgotPassword(){
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        axios.post(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/user/forgot-password`, values)
+        axios.post(`${process.env.REACT_APP_URL}/user/forgot-password`, values)
         .then(res=>{
             if(res.data.Status==='Success'){
                 alert('Check your mailbox to reset the password')

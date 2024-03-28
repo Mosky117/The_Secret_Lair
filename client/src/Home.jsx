@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 function Home(){
     const [posts, setPosts]=useState([]);
@@ -11,7 +14,7 @@ function Home(){
     axios.defaults.withCredentials=true;
 
     useEffect(()=>{
-        axios.get('https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts')
+        axios.get(`${process.env.REACT_APP_URL}/posts`)
         .then(res=>{
             if(res.data.Status==='Success'){
                 setPosts(res.data.posts);
@@ -22,7 +25,7 @@ function Home(){
     
     const handleSearch=(e)=>{
         e.preventDefault();
-        axios.post('https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts/search', search)
+        axios.post(`${process.env.REACT_APP_URL}/posts/search`, search)
         .then(res=>{
             if(res.data.Status==='Success'){
                 setPosts(res.data.posts);
