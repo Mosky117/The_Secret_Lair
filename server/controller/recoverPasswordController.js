@@ -31,7 +31,7 @@ const forgotPassword = (req, res) => {
 
         const recoveryToken = jwt.sign({ email }, process.env.REACT_APP_JWT_KEY, { expiresIn: '1h' });
 
-        const resetLink=`http://localhost:3000/user/reset-password/${recoveryToken}`;
+        const resetLink=`https://the-secret-lair-v7oi-eight.vercel.app/user/reset-password/${recoveryToken}`;
 
         const mailOptions={
             from: process.env.REACT_APP_EMAIL,
