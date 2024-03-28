@@ -1,9 +1,6 @@
 import React,{useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 function Login(){
     const [values, setValues]=useState({
@@ -17,7 +14,7 @@ function Login(){
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        axios.post(`${process.env.REACT_APP_URL}/user/login`,values)
+        axios.post(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/user/login`,values)
         .then(res=>{
             console.log(res);
             if(res.data.Status==='Success'){

@@ -1,9 +1,6 @@
 import React,{useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 function Register(){
     const [values, setValues]=useState({
@@ -25,7 +22,7 @@ function Register(){
             alert('Invalid password: at least 10 characters, a number and a special character');
             return;
         }
-        axios.post(`${process.env.REACT_APP_URL}/user/register`,values)
+        axios.post(`https://the-secret-lair.onrender.com/user/register`,values)
         .then(res=>{
             if(res.data.Status==='Success'){
                 navigate('/user/login');

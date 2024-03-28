@@ -1,9 +1,6 @@
 import React,{useState} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 function ResetPassword(){
     const {token}=useParams();
@@ -16,7 +13,7 @@ function ResetPassword(){
 
     const handleSubmit=(e)=>{
         e.preventDefault()
-        axios.post(`${process.env.REACT_APP_URL}/user/update-password`, values)
+        axios.post(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/user/update-password`, values)
         .then(res=>{
             if(res.data.Status==='Success'){
                 navigate('/user/login');

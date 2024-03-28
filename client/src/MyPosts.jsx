@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import dotenv from 'dotenv';
-
-dotenv.config();
 
 function MyPosts(){
 
@@ -27,7 +24,7 @@ function MyPosts(){
     axios.defaults.withCredentials=true;
 
     useEffect(()=>{
-        axios.get(`${process.env.REACT_APP_URL}/user/posts`)
+        axios.get(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/user/posts`)
         .then(res=>{
             if(res.data.Status==='Success'){
                 setMyPosts(res.data.myPosts);
@@ -40,12 +37,12 @@ function MyPosts(){
 
     const handlePost=(e)=>{
         e.preventDefault();
-        axios.get(`${process.env.REACT_APP_URL}/posts/userId`)
+        axios.get('https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts/userId')
         .then(res=>{
           setValues({...post, userId: res.data.id});
         })
 
-        axios.post(`${process.env.REACT_APP_URL}/posts`, post)
+        axios.post(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts`, post)
         .then(res=>{
             if(res.data.Status==='Success'){
                 window.location.reload();
@@ -65,7 +62,7 @@ function MyPosts(){
     }
     const handleUpdate=(e)=>{
       e.preventDefault();
-      axios.put(`${process.env.REACT_APP_URL}/posts`, editPost)
+      axios.put(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts`, editPost)
       .then(res=>{
         if(res.data.Status==='Success'){
           setShowEdit(false);
@@ -78,7 +75,7 @@ function MyPosts(){
     }
 
     const handleDelete=(postId)=>{
-        axios.delete(`${process.env.REACT_APP_URL}/posts/${postId}`)
+        axios.delete(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts/${postId}`)
         .then(res=>{
             if(res.data.Status==='Success'){
                 window.location.reload();
