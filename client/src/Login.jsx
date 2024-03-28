@@ -4,7 +4,7 @@ import axios from 'axios';
 import useUserSession from "./useUserSession";
 
 function Login(){
-    const {saveUserSession}=useUserSession();
+    // const {saveUserSession}=useUserSession();
     const [values, setValues]=useState({
         email:'',
         password:''
@@ -18,10 +18,10 @@ function Login(){
         .then(res=>{
             console.log(res);
             if(res.data.Status==='Success'){
-                saveUserSession(res.data.token, ()=>{
-                    navigate('/');
-                });
-                
+                navigate('/');
+                // saveUserSession(res.data.token, ()=>{
+                // });
+
             }else{
                 alert('Error');
             }

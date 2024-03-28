@@ -2,6 +2,7 @@ import db from "../db.js";
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
+import useUserSession from "../../client/src/useUserSession.js";
 
 dotenv.config();
 
@@ -38,8 +39,37 @@ const register=(req, res) => {
 }
 
 
+// const login=(req, res)=>{
+//     const sql='SELECT * FROM login WHERE email = $1';
+//     const {saveUserSession}=useUserSession();
+//     db.query(sql, [req.body.email], (err, data)=>{
+//         const datas=data.rows;
+//         if(err) {
+//             return res.json({Error: 'Database error'});
+//         }
+//         if(datas.length > 0){
+//             bcrypt.compare(req.body.password.toString(), datas[0].password, (bcryptErr, result)=>{
+//                 if(bcryptErr) {
+//                     return res.json({Error: 'Error in password comparison'});
+//                 }
+//                 if(result){ 
+//                     const username=datas[0].username;
+//                     const id=datas[0].id;
+//                     const token= jwt.sign({username, id},process.env.REACT_APP_JWT_KEY,{expiresIn:'1d'});
+//                     saveUserSession(token);
+//                     return res.json({Status: 'Success', token});
+//                 } else {
+//                     return res.json({Error: 'Incorrect password'});
+//                 }
+//             });
+//         } else {
+//             return res.json({Error: 'Incorrect email'});
+//         }
+//     });
+// }
 const login=(req, res)=>{
     const sql='SELECT * FROM login WHERE email = $1';
+    const {saveUserSession}=useUserSession();
     db.query(sql, [req.body.email], (err, data)=>{
         const datas=data.rows;
         if(err) {
@@ -54,7 +84,8 @@ const login=(req, res)=>{
                     const username=datas[0].username;
                     const id=datas[0].id;
                     const token= jwt.sign({username, id},process.env.REACT_APP_JWT_KEY,{expiresIn:'1d'});
-                    return res.json({Status: 'Success', token});
+                    saveUserSession(token);
+                    return res.json({Status: 'Success'});
                 } else {
                     return res.json({Error: 'Incorrect password'});
                 }

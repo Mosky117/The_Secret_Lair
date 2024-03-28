@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import { register, login, logout } from './controller/authController.js';
 import { post, updatePost, deletePost, myPosts, searchPosts, allPosts } from './controller/postController.js';
 import { forgotPassword, resetPassword } from './controller/recoverPasswordController.js';
+import useUserSession from '../client/src/useUserSession.js';
 
 dotenv.config();
 const app=express();
@@ -36,7 +37,8 @@ app.use(express.json());
 const PORT=process.env.REACT_APP_PORT;
 
 const verifyUser=(req, res, next)=>{
-    const token=req.cookies.token;
+    // const token=req.cookies.token
+    const {token}=useUserSession();
     if(!token){
         return res.json({Error:'You are not logged in'});
     }
