@@ -37,12 +37,6 @@ const PORT=process.env.REACT_APP_PORT;
 
 const verifyUser=(req, res, next)=>{
     const token=req.cookies.token;
-    
-    res.cookie('token', token, {
-        httpOnly: true,
-        secure: true,
-        sameSite: "none"
-    }); 
     if(!token){
         return res.json({Error:'You are not logged in'});
     }

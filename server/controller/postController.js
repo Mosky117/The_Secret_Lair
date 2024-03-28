@@ -44,7 +44,7 @@ const deletePost=(req, res) => {
 
 const myPosts= (req, res)=>{
     const sql='SELECT * FROM post WHERE userId=$1 ORDER BY created_at DESC';
-    db.query(sql, [req.id], (err, data)=>{
+    db.query(sql, req.id, (err, data)=>{
         const datas=data.rows;
         if(err){
             return res.json({Error:'No posts found'});
