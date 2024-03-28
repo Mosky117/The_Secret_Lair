@@ -9,13 +9,13 @@ import { forgotPassword, resetPassword } from './controller/recoverPasswordContr
 
 dotenv.config();
 const app=express();
-app.use(express.json());
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
-    next();
-});
 
-app.use(cookieParser());
+app.options("/*", (req, res) => {
+    res.header('Access-Control-Allow-Origin', 'https://pat-travel.vercel.app');
+    res.header('Access-Control-Allow-Credentials', true);
+    res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH");
+    res.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
+});
 
 app.use(cors({
     origin: [process.env.REACT_APP_URL],
@@ -23,6 +23,8 @@ app.use(cors({
     credentials: true
 }));
 
+app.use(cookieParser());
+app.use(express.json());
 const PORT=process.env.REACT_APP_PORT;
 
 const verifyUser=(req, res, next)=>{
