@@ -11,7 +11,7 @@ dotenv.config();
 const app=express();
 
 app.options("/*", (req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://pat-travel.vercel.app');
+    res.header('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
     res.header('Access-Control-Allow-Credentials', true);
     res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH");
     res.header('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
