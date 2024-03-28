@@ -6,14 +6,6 @@ import dotenv from 'dotenv';
 import { register, login, logout } from './controller/authController.js';
 import { post, updatePost, deletePost, myPosts, searchPosts, allPosts } from './controller/postController.js';
 import { forgotPassword, resetPassword } from './controller/recoverPasswordController.js';
-
-dotenv.config();
-const app=express();
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
-    next();
-});
-
 // app.options("/*", (req, res) => {
 //     res.header('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
 //     res.header('Access-Control-Allow-Credentials', true);
@@ -23,11 +15,19 @@ app.use((req, res, next) => {
 //     res.status(204).end();
 // });
 
+dotenv.config();
+const app=express();
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
+    next();
+});
+
+
 app.use(cors({
     origin: [process.env.REACT_APP_URL],
     methods: ['GET','POST','PUT','DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true
+    credentials: true,
+    sameSite:'none'
 }));
 
 app.use(cookieParser());
