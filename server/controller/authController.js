@@ -53,7 +53,7 @@ const login=(req, res)=>{
                 if(result){ 
                     const username=datas[0].username;
                     const id=datas[0].id;
-                    const token= jwt.sign({username, id},process.env.REACT_APP_JWT_KEY,{expiresIn:'1d'});
+                    const token= jwt.sign({username, id},process.env.JWT_KEY,{expiresIn:'1d'});
                     res.cookie('token', token, {
                         httpOnly: true,
                         secure: true,

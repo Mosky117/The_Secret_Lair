@@ -10,38 +10,45 @@ import { forgotPassword, resetPassword } from './controller/recoverPasswordContr
 dotenv.config();
 const app=express();
 // app.use((req, res, next) => {
-    //     res.setHeader('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
+    //     res.setHeader('Access-Control-Allow-Origin', process.env.URL);
     //     next();
     // });
     
     app.options("/*", (req, res) => {
-        res.header('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
+        res.header('Access-Control-Allow-Origin', process.env.URL);
         res.header('Access-Control-Allow-Credentials', true);
-        res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH");
+        res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT");
         res.header('Access-Control-Allow-Headers',
             'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
         res.status(204).end();
     });
 
 app.use(cors({
-    origin: [process.env.REACT_APP_URL],
+    origin: [process.env.URL],
     methods: ['GET','POST','PUT','DELETE'],
     credentials: true
 }));
 
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cookieParser());
 app.use(express.json());
-const PORT=process.env.REACT_APP_PORT;
+const PORT=process.env.PORT;
 
 const verifyUser=(req, res, next)=>{
     const token=req.cookies.token;
     if(!token){
         return res.json({Error:'You are not logged in'});
     }
-    jwt.verify(token, process.env.REACT_APP_JWT_KEY, (err, decoded)=>{
+    jwt.verify(token, process.env.JWT_KEY, (err, decoded)=>{
         if(err){
             return res.json({Error:'Invalid token'});
         }else{
+            res.cookie('token', token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none"
+            }); 
             req.username=decoded.username;
             req.id=decoded.id;
             next();
