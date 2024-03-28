@@ -15,7 +15,7 @@ const app=express();
 // });
 
 app.use((req, res) => {
-    res.header('Access-Control-Allow-Origin', 'https://pat-travel.vercel.app');
+    res.header('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
     res.header('Access-Control-Allow-Credentials', true);
     res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PATCH");
     res.header('Access-Control-Allow-Headers',
