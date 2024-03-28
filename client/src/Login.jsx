@@ -1,8 +1,10 @@
 import React,{useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import useUserSession from "./useUserSession";
 
 function Login(){
+    const {saveUserSession}=useUserSession();
     const [values, setValues]=useState({
         email:'',
         password:''
@@ -16,7 +18,7 @@ function Login(){
         .then(res=>{
             console.log(res);
             if(res.data.Status==='Success'){
-                localStorage.setItem('token', res.data.token);
+                saveUserSession(res.data.token);
                 navigate('/');
             }else{
                 alert('Error');
