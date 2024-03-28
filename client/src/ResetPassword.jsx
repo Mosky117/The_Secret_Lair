@@ -13,7 +13,7 @@ function ResetPassword(){
 
     const handleSubmit=(e)=>{
         e.preventDefault()
-        axios.post(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/user/update-password`, values)
+        axios.post(`https://the-secret-lair.vercel.app/user/update-password`, values)
         .then(res=>{
             if(res.data.Status==='Success'){
                 navigate('/user/login');

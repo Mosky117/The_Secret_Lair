@@ -24,7 +24,7 @@ function MyPosts(){
     axios.defaults.withCredentials=true;
 
     useEffect(()=>{
-        axios.get(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/user/posts`)
+        axios.get(`https://the-secret-lair.vercel.app/user/posts`)
         .then(res=>{
             if(res.data.Status==='Success'){
                 setMyPosts(res.data.myPosts);
@@ -37,12 +37,12 @@ function MyPosts(){
 
     const handlePost=(e)=>{
         e.preventDefault();
-        axios.get('https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts/userId')
+        axios.get('https://the-secret-lair.vercel.app/posts/userId')
         .then(res=>{
           setValues({...post, userId: res.data.id});
         })
 
-        axios.post(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts`, post)
+        axios.post(`https://the-secret-lair.vercel.app/posts`, post)
         .then(res=>{
             if(res.data.Status==='Success'){
                 window.location.reload();
@@ -62,7 +62,7 @@ function MyPosts(){
     }
     const handleUpdate=(e)=>{
       e.preventDefault();
-      axios.put(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts`, editPost)
+      axios.put(`https://the-secret-lair.vercel.app/posts`, editPost)
       .then(res=>{
         if(res.data.Status==='Success'){
           setShowEdit(false);
@@ -75,7 +75,7 @@ function MyPosts(){
     }
 
     const handleDelete=(postId)=>{
-        axios.delete(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts/${postId}`)
+        axios.delete(`https://the-secret-lair.vercel.app/posts/${postId}`)
         .then(res=>{
             if(res.data.Status==='Success'){
                 window.location.reload();

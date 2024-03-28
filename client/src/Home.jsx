@@ -11,7 +11,7 @@ function Home(){
     axios.defaults.withCredentials=true;
 
     useEffect(()=>{
-        axios.get('https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts')
+        axios.get('https://the-secret-lair.vercel.app/posts')
         .then(res=>{
             if(res.data.Status==='Success'){
                 setPosts(res.data.posts);
@@ -22,7 +22,7 @@ function Home(){
     
     const handleSearch=(e)=>{
         e.preventDefault();
-        axios.post('https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/posts/search', search)
+        axios.post('https://the-secret-lair.vercel.app/posts/search', search)
         .then(res=>{
             if(res.data.Status==='Success'){
                 setPosts(res.data.posts);

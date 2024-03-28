@@ -22,7 +22,7 @@ function Register(){
             alert('Invalid password: at least 10 characters, a number and a special character');
             return;
         }
-        axios.post(`https://the-secret-lair.onrender.com/user/register`,values)
+        axios.post(`https://the-secret-lair.vercel.app/user/register`,values)
         .then(res=>{
             if(res.data.Status==='Success'){
                 navigate('/user/login');

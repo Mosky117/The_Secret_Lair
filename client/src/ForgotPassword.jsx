@@ -8,7 +8,7 @@ function ForgotPassword(){
 
     const handleSubmit=(e)=>{
         e.preventDefault();
-        axios.post(`https://vercel.com/davids-projects-c9742275/the-secret-lair-wyus/user/forgot-password`, values)
+        axios.post(`https://the-secret-lair.vercel.app/user/forgot-password`, values)
         .then(res=>{
             if(res.data.Status==='Success'){
                 alert('Check your mailbox to reset the password')
