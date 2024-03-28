@@ -19,6 +19,12 @@ dotenv.config();
 const app=express();
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', process.env.REACT_APP_URL);
+    res.cookie({
+        httpOnly: true,
+        secure: true,
+        maxAge: 1000 * 60 * 60 * 48,
+        sameSite: 'none'
+    })
     next();
 });
 
