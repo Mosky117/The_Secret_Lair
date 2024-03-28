@@ -4,7 +4,7 @@ import useUserSession from "./useUserSession";
 
 function Navbar(){
   const {token, logout}=useUserSession();
-
+  console.log(token);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
